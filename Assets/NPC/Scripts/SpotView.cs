@@ -3,7 +3,7 @@ using UnityEngine;
 public class SpotView : MonoBehaviour
 {
     [Header("View")]
-    [SerializeField] private Light spotLight;
+    public Light spotLight;
     private float viewAngle;
     private Color originalLightColor;    
     [SerializeField] private float viewDistance;
@@ -57,9 +57,11 @@ public class SpotView : MonoBehaviour
             }
         }
         return false;
+    }
 
-        
-
+    public void SetRange(float value)
+    {
+        spotLight.range = value;
     }
 
     private void OnDrawGizmos()
