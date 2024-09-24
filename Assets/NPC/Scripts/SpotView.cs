@@ -7,6 +7,8 @@ public class SpotView : MonoBehaviour
     private float viewAngle;
     private Color originalLightColor;    
     [SerializeField] private float viewDistance;
+    [SerializeField] private float toleranceTime;
+    private float toltt;
     [SerializeField] private LayerMask viewBlockLayer;
 
     private Transform player;
@@ -25,6 +27,8 @@ public class SpotView : MonoBehaviour
 
             player = FindObjectOfType<Player>().transform;
         }
+
+        toltt = toleranceTime;
     }
 
     private void Update()
@@ -32,10 +36,25 @@ public class SpotView : MonoBehaviour
         if (CanSeePlayer())
         {
             spotLight.color = Color.red;
+
+            if (toleranceTime <= 0)
+            {
+                // DERROTA
+                MenuOptions.LoadScene("Title");
+            }
+            else
+            {
+                toleranceTime -= Time.deltaTime;
+            }
         }
         else
         {
             spotLight.color = originalLightColor;
+
+            if (toleranceTime < toltt)
+            {
+                toleranceTime += Time.deltaTime;
+            }
         }
     }
 

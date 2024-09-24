@@ -14,6 +14,9 @@ public class Gatekeeper : MonoBehaviour
     private RadiusView radiusView;
     private SpotView spotView;
 
+    [SerializeField] private float toleranceTime;
+    private float toltt;
+
     private NavMeshAgent navMeshAgent;
 
     [Header("Move 1 [1]")]
@@ -40,6 +43,8 @@ public class Gatekeeper : MonoBehaviour
 
     private void Start()
     {
+        action = 0;
+
         SetAction(rotine[rotineId]);
 
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -104,7 +109,20 @@ public class Gatekeeper : MonoBehaviour
             if (Vector3.Distance(transform.position, player.transform.position) <= radiusViewDistance)
             {
                 radiusView.ChangeColor(Color.red);
-                //
+
+                if (toleranceTime <= 0)
+                {
+                    // DERROTA
+                    MenuOptions.LoadScene("Title");
+                }
+                else
+                {
+                    toleranceTime -= Time.deltaTime;
+                }
+            }
+            else if (toleranceTime < toltt)
+            {
+                toleranceTime += Time.deltaTime;
             }
         }
     }
