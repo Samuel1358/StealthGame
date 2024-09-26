@@ -319,7 +319,7 @@ MonoBehaviour:
   toleranceTime: 2
   pathTrack1: {fileID: 0}
   pathTrack2: {fileID: 0}
-  waitTime: 3
+  waitTime: 2
   drowseTime: 5
   drowseSpeed: 5
 --- !u!195 &3033870738718270142

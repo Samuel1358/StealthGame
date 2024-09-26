@@ -203,7 +203,7 @@ public class Cook : MonoBehaviour
             if (Vector3.Distance(transform.position, player.transform.position) <= 0.05f)
             {
                 // DERROTA
-                MenuOptions.LoadScene("Title");
+                MenuOptions.LoadScene("Lose");
             }
         }
         else
@@ -216,12 +216,12 @@ public class Cook : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.forward * angryDistance);
         Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, transform.forward * followDistance);
         Gizmos.color = Color.white;
-    }
+    }*/
 }

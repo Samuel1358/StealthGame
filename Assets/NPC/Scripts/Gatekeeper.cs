@@ -44,6 +44,7 @@ public class Gatekeeper : MonoBehaviour
     private void Start()
     {
         action = 0;
+        toltt = toleranceTime;
 
         SetAction(rotine[rotineId]);
 
@@ -113,7 +114,7 @@ public class Gatekeeper : MonoBehaviour
                 if (toleranceTime <= 0)
                 {
                     // DERROTA
-                    MenuOptions.LoadScene("Title");
+                    MenuOptions.LoadScene("Lose");
                 }
                 else
                 {
@@ -122,6 +123,7 @@ public class Gatekeeper : MonoBehaviour
             }
             else if (toleranceTime < toltt)
             {
+                radiusView.ResetColor();
                 toleranceTime += Time.deltaTime;
             }
         }

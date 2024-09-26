@@ -40,7 +40,7 @@ public class SpotView : MonoBehaviour
             if (toleranceTime <= 0)
             {
                 // DERROTA
-                MenuOptions.LoadScene("Title");
+                MenuOptions.LoadScene("Lose");
             }
             else
             {
@@ -83,10 +83,10 @@ public class SpotView : MonoBehaviour
         spotLight.range = value;
     }
 
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.forward * viewDistance);
         Gizmos.color = Color.white;
-    }
+    }*/
 }

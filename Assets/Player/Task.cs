@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Task : MonoBehaviour
 {
+    [SerializeField] private Color color;
+
     [Header("UI")]
     [TextArea]
     public string description;
@@ -12,7 +14,12 @@ public class Task : MonoBehaviour
     [Header("Functionality")]
     [SerializeField] private float interactableDistance;
     public bool interactable;
+    [SerializeField] private GameObject model;
 
+    private void Start()
+    {
+        model.GetComponent<Renderer>().material.color = color;
+    }
 
     public bool VerifyDistanceToPlayer(Player player)
     {
@@ -24,5 +31,11 @@ public class Task : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void Complite()
+    {
+        done = true;
+        model.SetActive(false);
     }
 }

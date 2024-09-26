@@ -8,44 +8,75 @@ public class TasksObserver : MonoBehaviour
 
     private Task[] tasks;
     private Player player;
+    private TaskList taskList;
 
+    [Header("Conclusão")]
+    [SerializeField] private GameObject exit;
+    [SerializeField] private Transform exitPosition;
+    [SerializeField] private GameObject finalMensage;
+    public bool conclued;
+    private int doneds;
     private int inativos;
 
     private void Start()
     {
         tasks = FindObjectsOfType<Task>();
         player = FindObjectOfType<Player>();
+        taskList = FindObjectOfType<TaskList>();
     }
 
     private void Update()
     {
-        foreach (var task in tasks)
+        if (!conclued)
         {
-            if (task.VerifyDistanceToPlayer(player))
+            foreach (var task in tasks)
             {
-                task.interactable = true;
-                #pragma warning disable CS0618
-                if (interactableLabel.active == false)
+                if (task.VerifyDistanceToPlayer(player))
                 {
-                    interactableLabel.SetActive(true);
+                    task.interactable = true;
+                    #pragma warning disable CS0618
+                    if (interactableLabel.active == false)
+                    {
+                        interactableLabel.SetActive(true);
+                    }
+
+                    if (Input.GetKey(KeyCode.E))
+                    {
+                        task.Complite();
+                        taskList.Verify();
+                    }
+                }
+                else
+                {
+                    task.interactable = false;
+                    inativos++;
+                }
+
+                if (task.done)
+                {
+                    doneds++;
                 }
             }
-            else
-            {
-                task.interactable = false;
-                inativos++;
-            }
-        }
 
-        if (inativos == tasks.Length)
-        {
-            #pragma warning disable CS0618
-            if (interactableLabel.active == true)
+            if (inativos == tasks.Length)
             {
+                #pragma warning disable CS0618
+                if (interactableLabel.active == true)
+                {
+                    interactableLabel.SetActive(false);
+                }
+            }
+
+            if (doneds == tasks.Length)
+            {
+                conclued = true;
+                Instantiate(exit, exitPosition);
                 interactableLabel.SetActive(false);
+                finalMensage.SetActive(true);
             }
-        }
 
-        inativos = 0;
+            inativos = 0;
+            doneds = 0;
+        }
     }
 }

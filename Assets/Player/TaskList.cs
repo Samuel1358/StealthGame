@@ -35,14 +35,6 @@ public class TaskList : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            Verify();
-        }
-    }
-
     public void Verify()
     {
         for (int i = 0; i < taskList.Count; i++)
